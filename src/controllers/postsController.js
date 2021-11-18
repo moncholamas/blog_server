@@ -48,10 +48,37 @@ export async function createPost(req,res,next){
     }
 };
 
-export function updatePost(req,res,next){
-    res.json({msg: "hola mundo"})
+export async function updatePost(req,res,next){
+    const id = req.params.id
+    const {title,content,img} = req.body;
+    try {
+        initModels(sequelize);
+        const updated_post = await posts.update({
+            title,
+            content,
+            img
+        },{where:{id_post:id}});
+       if(updated_post[0]===0){throw new Error(`no se encontraron coincidencias para actualizar con el id: ${id}`)}
+
+        res.json({msg: 'post actualizado correctamente'});
+        
+    } catch (error) {
+        res.json({msg: error});
+        console.log(error);
+    }
 };
 
-export function deletePost(req,res,next){
-    res.json({msg: "hola mundo"})
+export async function deletePost(req,res,next){
+    const id = req.params.id;
+    try {
+        initModels(sequelize);
+        const deleted_post = await posts.destroy({where:{id_post:id}});
+        if(deleted_post===0){throw new Error(`no se encontraron coincidencias para borrar con el id ${id}`)}
+
+        res.json({msg: 'post eliminado correctamente'})
+        
+    } catch (error) {
+        res.json({msg: error.message});
+        console.log(error);
+    }
 };
