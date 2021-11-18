@@ -13,12 +13,39 @@ export async function getAll(req,res,next){
     }
 };
 
-export function getById(req,res,next){
-    res.json({msg: "hola mundo"})
+export async function getById(req,res,next){
+    const id = req.params.id;
+
+    try {
+        initModels(sequelize);
+        const post = await posts.findByPk(id);
+        console.log(post);
+        if(!post){ throw new Error(`no existe un post con el id: ${id}`)}
+        
+        res.json({msg: post});
+        
+    } catch (error) {
+        console.log(error);
+    }
+    
 };
 
-export function createPost(req,res,next){
-    res.json({msg: "hola mundo"})
+export async function createPost(req,res,next){
+    const {title,content,img} = req.body;
+    try {
+        initModels(sequelize);
+        const new_post = await posts.create({
+            title,
+            content,
+            img
+        });
+    
+        res.json({msg: new_post})
+        
+    } catch (error) {
+        res.json({msg: error});
+        console.log(error);
+    }
 };
 
 export function updatePost(req,res,next){
