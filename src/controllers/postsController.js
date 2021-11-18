@@ -9,7 +9,7 @@ export async function getAll(req,res,next){
         res.json({msg: list_posts});
         
     } catch (error) {
-        console.log(error);
+        next(error);
     }
 };
 
@@ -25,7 +25,7 @@ export async function getById(req,res,next){
         res.json({msg: post});
         
     } catch (error) {
-        console.log(error);
+        next(error);
     }
     
 };
@@ -43,8 +43,7 @@ export async function createPost(req,res,next){
         res.json({msg: new_post})
         
     } catch (error) {
-        res.json({msg: error});
-        console.log(error);
+        next(error);
     }
 };
 
@@ -63,8 +62,7 @@ export async function updatePost(req,res,next){
         res.json({msg: 'post actualizado correctamente'});
         
     } catch (error) {
-        res.json({msg: error});
-        console.log(error);
+        next(error);
     }
 };
 
@@ -78,7 +76,6 @@ export async function deletePost(req,res,next){
         res.json({msg: 'post eliminado correctamente'})
         
     } catch (error) {
-        res.json({msg: error.message});
-        console.log(error);
+        next(error);
     }
 };
