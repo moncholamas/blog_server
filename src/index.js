@@ -4,7 +4,7 @@ import sequelize from './db/connection/connection.js';
 async function main(){
     try {
         //conexion a la DB
-        await sequelize.sync({force:true});
+        await sequelize.authenticate();
         console.log("db sincronizada");
         //arrancar el servidor
         app.listen(app.get('port'),()=>{

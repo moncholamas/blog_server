@@ -41,18 +41,32 @@ export default class posts extends Model {
           }
       }
     },
-    createdAt:true,
+    id_category: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate:{
+            notEmpty:{
+                args:true,
+                msg: 'ingrese una categoria'
+            }
+        },
+        references: {
+          model: 'categories',
+          key: 'id_category'
+        }
+      },
   }, {
     freezeTableName:true,
     sequelize,
     tableName: 'posts',
     timestamps: false,
+    createdAt: true,
     indexes: [
       {
         name: "posts_pkey",
         unique: true,
         fields: [
-          { name: "id_user" },
+          { name: "id_post" },
         ]
       },
     ]

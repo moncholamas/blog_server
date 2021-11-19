@@ -1,14 +1,21 @@
 import _posts from './posts';
+import _categories from './categories';
 import _sequelize from 'sequelize';
 const DataTypes = _sequelize.DataTypes;
 
 
-//exportamos una funcion que recibe la instancia de conexion de sequelize
+//exportamos una funcion que recibe la instancia de conexion actual de sequelize
 export default function initModels(sequelize){
-    const posts = _posts.init(sequelize,DataTypes);
+    //instancia los modelos
+    let posts = _posts.init(sequelize,DataTypes);
+    let categories = _categories.init(sequelize,DataTypes);
+    
+    posts.belongsTo(categories,{as:'category',foreignKey:'id_category'});
 
 
+    //retorna los modelos instanciados
     return {
-        posts
+        posts,
+        categories
     }
 }

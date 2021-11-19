@@ -1,5 +1,6 @@
 import initModels from "../models/init_models";
 import posts from "../models/posts";
+import categories from "../models/categories";
 import sequelize from "../db/connection/connection";
 
 export async function getAll(req,res,next){
@@ -18,8 +19,7 @@ export async function getById(req,res,next){
 
     try {
         initModels(sequelize);
-        const post = await posts.findByPk(id);
-        console.log(post);
+        const post = await posts.findByPk(id,{attributes:{exclude:['id_category']},include:{model:categories,as:'category'}});
         if(!post){ throw new Error(`no existe un post con el id: ${id}`)}
         
         res.json({msg: post});
@@ -31,13 +31,14 @@ export async function getById(req,res,next){
 };
 
 export async function createPost(req,res,next){
-    const {title,content,img} = req.body;
+    const {title,content,img,id_category} = req.body;
     try {
         initModels(sequelize);
         const new_post = await posts.create({
             title,
             content,
-            img
+            img,
+            id_category
         });
     
         res.json({msg: new_post})
