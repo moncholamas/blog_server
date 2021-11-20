@@ -1,4 +1,4 @@
-# API Mundo Disney
+# API blog server
 
 API para posts de un blog
 
