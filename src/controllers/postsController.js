@@ -9,7 +9,7 @@ export async function getAll(req,res,next){
         initModels(sequelize);
 
         const list_posts = await posts.findAll();
-
+        console.log(list_posts.length)
         if(list_posts.length===0){throw new Error('no existen posts cargados actualmente')};
 
         res.json({msg: list_posts});

@@ -12,7 +12,7 @@ export function handlerError(err, req, res, next){
             return res.status(400).send({ msg: 'la categoria ingresada no existe'}) }
 
         return res.status(400).send({
-            msg: err,
+            msg: err.message
         });
     }
 
