@@ -1,7 +1,13 @@
 {
-    "presets": [
-      ["@babel/preset-env", {
-        "useBuiltIns": false
-      }]
-    ]
+  "presets": [
+      [
+          "@babel/preset-env",
+      {
+          "targets": {
+              "esmodules": true
+          },
+          "modules": false
+      }
+      ]
+  ]
 }

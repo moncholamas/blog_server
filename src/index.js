@@ -5,7 +5,7 @@ async function main(){
     try {
         //conexion a la DB
         await sequelize.authenticate();
-        console.log("db sincronizada");
+        console.log("conectado correctamente a la db");
         //arrancar el servidor
         app.listen(app.get('port'),()=>{
             console.log('corriendo en el puerto:', app.get('port'));
