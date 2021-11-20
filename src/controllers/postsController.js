@@ -46,9 +46,7 @@ export async function createPost(req,res,next){
         await verify_url(img);
 
         //validar el formato -> si es otro lanza un error
-        verify_format(img, ['.jpg','.png','.webp']);
-
-        //validar la categoria
+        verify_format(img, ['.jpg','.png','.webp','.svg']);
 
 
         const new_post = await posts.create({
