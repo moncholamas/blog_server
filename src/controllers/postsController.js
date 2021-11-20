@@ -65,13 +65,21 @@ export async function createPost(req,res,next){
 
 export async function updatePost(req,res,next){
     const id = req.params.id
-    const {title,content,img} = req.body;
+    const {title,content,img,id_category} = req.body;
     try {
         initModels(sequelize);
+
+        //validar la url -> si no existe lanza un error
+        await verify_url(img);
+
+        //validar el formato -> si es otro lanza un error
+        verify_format(img, ['.jpg','.png','.webp','.svg']);
+
         const updated_post = await posts.update({
             title,
             content,
-            img
+            img,
+            id_category
         },{where:{id_post:id}});
 
        if(updated_post[0]===0){throw new Error(`no se encontraron coincidencias para actualizar con el id: ${id}`)}
