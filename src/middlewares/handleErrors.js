@@ -16,7 +16,7 @@ export function handlerError(err, req, res, next){
 
 
     //si es una excepcion 
-    console.log(err);
+    console.error(err);
     return res.status(500).send({
         msg: 'ocurrió un error inesperado',
     });

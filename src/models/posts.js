@@ -59,7 +59,7 @@ export default class posts extends Model {
     freezeTableName:true,
     sequelize,
     tableName: 'posts',
-    timestamps: false,
+    updatedAt: false,
     createdAt: true,
     indexes: [
       {
