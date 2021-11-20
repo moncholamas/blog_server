@@ -7,12 +7,12 @@ ___
 
 ## Empezando
 
-Para ver casos de usos precargados ingresa a la carpeta [postman](https://github.com/moncholamas/blog_server/tree/master/postman).
+Para ver casos de usos precargados ingresa a la carpeta [postman](https://github.com/moncholamas/blog_server/tree/master/postman) y descarga el backup para Postman con los ejemplos.
 
 ___
 
 ## Dependencias
-Antes de inicar el clonado del repositorio verifica tener:
+Antes de iniciar el clonado del repositorio verifica tener:
 
 - Mysql 8 o superior
 - NodeJS 14 o superior
@@ -36,7 +36,7 @@ npm install
 ### Generar base de datos
 En la raiz del proyecto ejecutar:
 ```sh
-mysql -h hostname -u user database < /db_mysql/db.sql
+mysql -h hostname -u user database < ./db_mysql/db.sql
 
 ```
 
