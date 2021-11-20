@@ -2,7 +2,7 @@ import initModels from "../models/init_models.js";
 import posts from "../models/posts.js";
 import categories from "../models/categories.js";
 import sequelize from "../db/connection/connection.js";
-import {verify_url} from '../helpers/verify_url.js'
+import {verify_url, verify_format} from '../helpers/verify.js'
 
 export async function getAll(req,res,next){
     try {
@@ -42,11 +42,11 @@ export async function createPost(req,res,next){
     try {
         initModels(sequelize);
 
-        //validar si la url -> si no existe lanza un error
+        //validar la url -> si no existe lanza un error
         await verify_url(img);
 
         //validar el formato -> si es otro lanza un error
-        
+        verify_format(img, ['.jpg','.png','.webp']);
 
         //validar la categoria
 
